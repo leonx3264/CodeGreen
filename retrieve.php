@@ -5,7 +5,7 @@
 <header>
 <img id="logo" src="logo.png">
 </header>
-
+<a id="homebutton" href="https://site.codegreen.space">Home</a>
 <div>
 	<ul>
 	<?php
@@ -13,7 +13,7 @@
 		$output = shell_exec("python3 findcity.py " . "'" . $city . "'");
 		echo $output;
 		if (strlen($output) == 0){
-			echo "<p>There are no results</p>";
+			echo "<li><h3>Oops</h3><p>There are no results..</p></li>";
 		}
 	?>
 	</ul>
