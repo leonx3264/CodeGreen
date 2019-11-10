@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Code Green</title>
+		<meta charset="utf-8" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="hacknjit.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	</head>
+	<body>
+        <header>
+            <!--<h1>Recycling</h1>-->
+		<img id="logo" src="logo.png" class="center">
+        </header>
+		<main>
+
+  <grid>
+   <section class="grid1">
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGjs44_1xVuxNsHPyljiuAfkc-2Rwm0Lc&callback=initMap"
+    async defer></script>
+
+                        <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places,visualization&sensor=false&key=AIzaSyCGjs44_1xVuxNsHPyljiuAfkc-2Rwm0Lc
+"></script>
+    <a href="#" id="showMyLocation"><button class="currentlocation" onclick="getLocation()">Current Location</button></a>
+    <div id="location"></div>
+    <div id="zipcode"></div>
+      <script>
+               $(function () {
+                $("#showMyLocation").click(function (event) {
+                    event.preventDefault();
+                    $(this).html();
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var geocoder = new google.maps.Geocoder();
+                        var latLng   = new google.maps.LatLng(
+                            position.coords.latitude, position.coords.longitude);
+                        geocoder.geocode({
+                            'latLng': latLng
+                        }, function (results, status) {
+                            for (var i = 0; i < results[0].address_components.length; i++) {
+                                var address = results[0].address_components[i];
+                                if (address.types[0] == "locality") {
+					document.getElementById("cityinput").value = (address.long_name);
+					document.getElementById("runpy").submit();
+                                    //$('#zipcode').html(address.long_name);
+					//$('#location').html(results[0].formatted_address);
+                                    $('#showMyLocation').hide();
+                                }
+                            }
+				//console.log(address[2]);
+                        });
+                    });
+                    return false;
+                });
+            });
+        </script>
+
+      </section>
+
+      <section class="grid2">
+                <p id="demo"> or </p>
+      </section>
+
+         <section class="grid3">
+            <section class="topnav">
+              <section class="search-container">
+                <form id="runpy" action="retrieve.php" method="post">
+                  <input type="text" placeholder="Enter the City.." name="city" id="cityinput" value="">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </section>
+            </section>
+      </section>
+
+    </grid>
+		</main>
+		<br/>
+	</body>
+</html>
